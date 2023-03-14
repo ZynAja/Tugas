@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js" async></script>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Axios Dummy JSON</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <h1 class="text-center">Axios Dummy JSON</h1>
+      </div>
+      <div class="PRODUCTS">
+        <div class="judul">
+          <h1>Produk</h1>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-outline-dark" onclick="allProducts()">
+              All Produk
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#singelProduk"
+            >
+              Single Produk
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#categoryProduk"
+            >
+              Category Produk
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="PELANGGAN">
+        <div class="judul">
+          <h1>Pelanggan</h1>
+          <p id="pesan"></p>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-outline-dark" onclick="allPelanggan()">
+              All Pelanggan
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#createPelanggan"
+            >
+              Create Pelanggan
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--     TABEL TAMPIL     -->
+      <div>
+
+        <!--    TAMPIL DATA CART   -->
+        <table class="table mt-2" id="cart">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+
+        <!--    TAMPIL DATA UTAMA   -->
+        <table class="table mt-2" id="tabel">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Isi Modal Single Produk -->
+    <div
+      class="modal fade"
+      id="singelProduk"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              CARI ID BARANG
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <select
+              id="cariId"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected disabled>Cari idBarang</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              onclick="cariBarang()"
+            >
+              Kirim
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Isi Modal Category Produk -->
+    <div
+      class="modal fade"
+      id="categoryProduk"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              CARI CATEGORY BARANG
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <select
+              id="cariCategory"
+              class="form-select"
+              aria-label="Default select example"
+            >
+              <option selected disabled>Cari Category Barang</option>
+              <option value="smartphones">smartphones</option>
+              <option value="laptops">laptops</option>
+              <option value="fragrances">fragrances</option>
+              <option value="skincare">skincare</option>
+              <option value="home-decoration">home-decoration</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              onclick="categoryBarang()"
+            >
+              Kirim
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Isi Modal Create Pelanggan -->
+    <div
+      class="modal fade"
+      id="createPelanggan"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              INSERT PELANGGAN
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form enctype="multipart/form-data">
+              <table>
+                <tr>
+                  <td><label for="pelanggan">Pelanggan : </label></td>
+                  <td>
+                    <input type="text" id="pelanggan" name="pelanggan" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="alamat">Alamat : </label></td>
+                  <td>
+                    <input type="text" id="alamat" name="alamat" />
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="telp">Telp : </label></td>
+                  <td><input type="text" id="telp" name="telp" /></td>
+                </tr>
+              </table>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+              onclick="addPelanggan()"
+            >
+              Kirim
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
